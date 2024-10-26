@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -18,6 +18,8 @@ services:
         condition: service_healthy
     networks:
       - app-network
+    volumes:
+      - ./app:/usr/src/app
 
   nginx:
     image: nginx:latest
