@@ -7,10 +7,10 @@ app.use(express.json());
 const connectToDatabase = () => {
   return new Promise((resolve, reject) => {
     const connection = mysql.createConnection({
-      host: process.env.DB_HOST || 'localhost',
-      user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || 'rootpassword',
-      database: process.env.DB_NAME || 'mydatabase'
+      host: 'mysql',
+      user: 'root',
+      password: 'rootpassword',
+      database: 'mydatabase'
     });
 
     connection.connect((err) => {
@@ -71,6 +71,9 @@ const retryConnect = async (retries = 5, delay = 5000) => {
           console.error('Error inserting into database:', err);
           return res.status(500).send('Internal Server Error');
         }
+
+        console.log(`Inserted ${name} into database`);
+        console.log('Results:', results);
 
         res.status(201).send("<h1>Full Cycle Rocks!</h1>");
       });
